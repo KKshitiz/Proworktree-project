@@ -3,8 +3,11 @@ import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/user_list_page.dart';
 import 'screens/login_screen_email.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
