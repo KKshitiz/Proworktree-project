@@ -1,10 +1,10 @@
 import 'package:Proworktree/screens/login_screen_email.dart';
 import 'package:Proworktree/screens/signup_screen.dart';
+import 'package:Proworktree/screens/user_list_page.dart';
 import 'package:flutter/material.dart';
-import 'package:Proworktree/utilities/google_signin.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Proworktree/utilities/constants.dart';
 import 'package:lottie/lottie.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   static const String id = '/login';
@@ -14,6 +14,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _googleAuth = GoogleSignIn();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,13 +43,11 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               color: Colors.blue,
               child: ListTile(
-//              focusColor: Colors.blue,
                 onTap: () async {
-//                GoogleAuth googleAuth = GoogleAuth();
-//                UserData userData = await googleAuth.signInWithGoogle();
-//                print(userData.userName);
-//                print(userData.emailAddress);
-//                print(userData.imageUrl);
+                  final userData = await _googleAuth.signIn();
+//                  print(userData.displayName);
+//                  print(userData.email);
+                  Navigator.pushNamed(context, UserPage.id);
                 },
                 title: Text('Login with Google'),
                 leading: Icon(Icons.email),

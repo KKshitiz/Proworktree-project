@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:Proworktree/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:Proworktree/utilities/user_api.dart';
 import 'package:Proworktree/widgets/user_list_tiles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UserPage extends StatefulWidget {
   static const String id = '/user';
@@ -15,7 +14,9 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> {
   final _auth = FirebaseAuth.instance;
+  final _googleAuth = GoogleSignIn();
   User loggedInUser;
+  GoogleSignInAccount loggedInGoogleUser;
 
   @override
   void initState() {
@@ -26,8 +27,12 @@ class _UserPageState extends State<UserPage> {
   void getLoggedInUser() async {
     try {
       final user = _auth.currentUser;
+      final userGoogle = _googleAuth.currentUser;
       if (user != null) {
         loggedInUser = user;
+      } else {
+        loggedInGoogleUser = userGoogle;
+        print(loggedInGoogleUser.displayName);
       }
     } catch (e) {
       print('exception: $e');

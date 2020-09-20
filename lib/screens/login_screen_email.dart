@@ -1,10 +1,11 @@
 import 'package:Proworktree/screens/user_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:lottie/lottie.dart';
 import 'package:Proworktree/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:Proworktree/widgets/page_heading.dart';
+import 'signup_screen.dart';
 
 class LoginScreenEmail extends StatefulWidget {
   static const String id = '/loginemail';
@@ -22,8 +23,7 @@ class _LoginScreenEmailState extends State<LoginScreenEmail> {
   Widget build(BuildContext context) {
     return ModalProgressHUD(
       inAsyncCall: isSpinning,
-      child: SafeArea(
-          child: Scaffold(
+      child: Scaffold(
         body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
@@ -35,7 +35,9 @@ class _LoginScreenEmailState extends State<LoginScreenEmail> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Heading(),
+                  PageHeading(
+                    heading: 'Login',
+                  ),
                   SizedBox(
                     height: 50,
                   ),
@@ -53,7 +55,6 @@ class _LoginScreenEmailState extends State<LoginScreenEmail> {
                           ),
                           fillColor: Colors.white,
                           hintText: 'Enter email',
-//                hintStyle: TextStyle(color: Colors.white),
                         ),
                         onChanged: (text) {
                           emailAddress = text;
@@ -83,8 +84,8 @@ class _LoginScreenEmailState extends State<LoginScreenEmail> {
                       SizedBox(
                         height: 20,
                       ),
-                      RaisedButton(
-                        onPressed: () async {
+                      GestureDetector(
+                        onTap: () async {
                           setState(() {
                             isSpinning = true;
                           });
@@ -101,7 +102,31 @@ class _LoginScreenEmailState extends State<LoginScreenEmail> {
                             isSpinning = false;
                           });
                         },
-                        child: Text('Login'),
+                        child: Container(
+                          margin: EdgeInsets.all(20),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 60),
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, SignupPage.id);
+                        },
+                        child: Text(
+                          'Not a user? Signup.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -110,35 +135,7 @@ class _LoginScreenEmailState extends State<LoginScreenEmail> {
             ),
           ),
         ),
-      )),
-    );
-  }
-}
-
-class Heading extends StatelessWidget {
-  const Heading({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Hero(
-          tag: 'hero',
-          child: Container(
-            width: 100,
-            height: 100,
-            child: Lottie.asset('assets/login_animation.json'),
-          ),
-        ),
-        Text(
-          'Login',
-          style: kBrandHeadingStyle,
-        ),
-      ],
+      ),
     );
   }
 }
