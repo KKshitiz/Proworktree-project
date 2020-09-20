@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 const String baseUrl = 'https://reqres.in/';
@@ -24,7 +23,6 @@ class UserApi {
   static Future<List> getUserData() async {
     await fetchUserDataFromApi(1);
     await fetchUserDataFromApi(2);
-//    print(_users);
     length = _users.length;
     return _users;
   }

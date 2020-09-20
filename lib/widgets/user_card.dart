@@ -23,9 +23,13 @@ class _UserCardState extends State<UserCard> {
               ),
             ),
             child: CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(
-                widget.userdata['avatar'].toString(),
+              radius: 54,
+              backgroundColor: Colors.blue,
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(
+                  widget.userdata['avatar'].toString(),
+                ),
               ),
             ),
           ),
@@ -40,17 +44,23 @@ class _UserCardState extends State<UserCard> {
                   ),
                 ),
                 SizedBox(
+                  height: 30,
                   width: 60,
                   child: Divider(
                     color: Colors.blue,
                     thickness: 3,
                   ),
                 ),
+                Icon(Icons.email),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   widget.userdata['email'].toString(),
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ],

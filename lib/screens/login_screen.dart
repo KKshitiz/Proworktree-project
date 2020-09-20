@@ -38,29 +38,51 @@ class _LoginPageState extends State<LoginPage> {
               style: kBrandHeadingStyle,
             ),
             SizedBox(
-              height: 15,
+              height: 10,
             ),
-            Container(
-              color: Colors.blue,
-              child: ListTile(
-                onTap: () async {
-                  final userData = await _googleAuth.signIn();
-//                  print(userData.displayName);
-//                  print(userData.email);
-                  Navigator.pushNamed(context, UserPage.id);
-                },
-                title: Text('Login with Google'),
-                leading: Icon(Icons.email),
+            GestureDetector(
+              onTap: () async {
+                final userData = await _googleAuth.signIn();
+                Navigator.pushNamed(context, UserPage.id);
+              },
+              child: Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(Icons.person_pin),
+                    Text(
+                      'Login with Google',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
-            Container(
-              color: Colors.grey[300],
-              child: ListTile(
-                onTap: () {
-                  Navigator.pushNamed(context, LoginScreenEmail.id);
-                },
-                title: Text('Login with Email'),
-                leading: Icon(Icons.email),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, LoginScreenEmail.id);
+              },
+              child: Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.email),
+                    Text('Login with Email'),
+                  ],
+                ),
               ),
             ),
             FlatButton(
